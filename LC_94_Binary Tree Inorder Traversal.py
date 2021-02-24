@@ -44,7 +44,7 @@ class Solution(object):
             if root: #如果根节点不为空
                 stack.append(root) 
                 root = root.left #自上而下的先把左侧所有节点放入栈中
-            else: #整棵树到底了，然后开始看右侧开始出栈
+            else: #整棵树到底了，然后边看右侧边开始出栈
                 root = stack.pop()
                 res.append(root.val)
                 root = root.right #此时root的值返回到while那一行循环对右侧子树开始相同步骤的判断
