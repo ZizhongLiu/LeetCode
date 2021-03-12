@@ -29,50 +29,31 @@ class Solution(object):
         :type root: TreeNode
         :rtype: bool
         """
-        def left_traversal(root,stack):
-            # print(root.val)
-            if root == None:
-                return []
-            stack = [root]
-            res = []
-            while stack:
-                root = stack.pop()
-                if root is not None:
-                    res.append(root.val)
-                    if root.right is not None:
-                        stack.append(root.right)
-                    if root.left is not None:
-                        stack.append(root.left)
-            return res
-        
-        def right_traversal(root,stack):
-            if root == None:
-                return []
-            stack = [root]
-            res = []
-            while stack:
-                root = stack.pop()
-                if root is not None:
-                    res.append(root.val)
-                    if root.left is not None:
-                        stack.append(root.left)
-                    if root.right is not None:
-                        stack.append(root.right)
-            return res        
-        
-        leftstack = []
-        rightstack = []
-        
-        if root is None:
+        if root is None: 
             return True
         
-        left_res = left_traversal(root.left,leftstack)
-        right_res = right_traversal(root.right,rightstack)
+        left_stack = [root.left]
+        right_stack = [root.right]
+        res = True
         
-        if left_res == right_res:
-            return True
-        else:
-            return False
+        while left_stack and right_stack:
+            leftnode = left_stack.pop()
+            rightnode = right_stack.pop()
+            
+            if not leftnode and not rightnode:
+                res = True
+                continue
+            if not leftnode or not rightnode:
+                res = False
+                break
+            if leftnode.val != rightnode.val:
+                res = False
+                break
+            else:
+                res = True
+                left_stack += [leftnode.right,leftnode.left]
+                right_stack += [rightnode.left,rightnode.right]
+        return res
 
 
         
